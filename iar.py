@@ -93,11 +93,13 @@ class Iar:
     def __gen_config_str(self, include_list, define_list):
         define_str = self.compile_config["DEFINE"]
         for define in define_list:
-            define_str += f" -D{define.strip()}"
+            if define != None:
+                define_str += f" -D{define.strip()}"
         include_str = ""
         for include in include_list:
-            include_path = os.path.join(self.proj_path, include.strip())
-            include_str += f" -I{include_path}"
+            if include != None:
+                include_path = os.path.join(self.proj_path, include.strip())
+                include_str += f" -I{include_path}"
         return f"{define_str} {include_str} {self.compile_config["ISYSTEM"]}"
 
 
